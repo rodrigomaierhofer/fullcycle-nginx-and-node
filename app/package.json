@@ -1,0 +1,29 @@
+{
+  "name": "fullcycle-nginx-and-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rodrigomaierhofer/fullcycle-nginx-and-node.git"
+  },
+  "author": "rodrigomaierhofer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rodrigomaierhofer/fullcycle-nginx-and-node/issues"
+  },
+  "homepage": "https://github.com/rodrigomaierhofer/fullcycle-nginx-and-node#readme",
+  "dependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "express": "^4.18.2",
+    "mysql2": "^2.3.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}

@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: app
+    image: fullcycle-nginx-and-node-app
+    build:
+      context: app
+      dockerfile: ./Dockerfile
+    environment:
+      PORT: 3000
+      MYSQL_HOST: 'mysql'
+      MYSQL_DATABASE: 'fullcycle-nginx-and-node'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'user_password'
+    volumes:
+      - ./app:/usr/src/app
+      - /usr/src/app/node_modules/
+    ports:
+      - 8080:3000
+    networks:
+      - fullcycle-nginx-and-node
+
+  mysql:
+    container_name: mysql
+    image: mysql
+    command: --innodb-use-native-aio=0
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'fullcycle-nginx-and-node'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'user_password'
+      MYSQL_ROOT_PASSWORD: 'user_password'
+    expose:
+      - '3306'
+    volumes:
+      - ./mysql_volume/:/var/lib/mysql
+    networks:
+      - fullcycle-nginx-and-node
+
+networks:
+  fullcycle-nginx-and-node:
+    driver: bridge
