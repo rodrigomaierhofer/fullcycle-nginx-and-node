@@ -16,10 +16,9 @@ services:
     volumes:
       - ./app:/usr/src/app
       - /usr/src/app/node_modules/
-    ports:
-      - 8080:3000
     networks:
       - fullcycle-nginx-and-node
+    command: /opt/bin/wait-for-it.sh mysql:3306 -t 40 -- npm run start
 
   mysql:
     container_name: mysql
@@ -35,6 +34,17 @@ services:
       - '3306'
     volumes:
       - ./mysql_volume/:/var/lib/mysql
+    networks:
+      - fullcycle-nginx-and-node
+
+  nginx:
+    image: nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - app
+    ports:
+      - "8080:80"
     networks:
       - fullcycle-nginx-and-node
 
